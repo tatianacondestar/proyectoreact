@@ -1,0 +1,6 @@
+CREAR ARCHIVO
+touch nombre_archivo.txt
+INSTALAR DEPENDENCIAS
+pip install -r requirements.txt
+PARA EJECUTAR EL SERVIDOR python
+python app.py
