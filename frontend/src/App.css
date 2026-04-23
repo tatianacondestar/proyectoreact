@@ -1,170 +1,155 @@
-.App {
-  min-height: 100vh;
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f5e9, #f0f2f5);
+  margin: 0;
   padding: 20px;
 }
 
-
+/* CONTENEDOR PRINCIPAL */
 .home {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.home h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 30px;
-  font-size: 2.5rem;
-}
-
-.error-message {
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 12px 20px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  border: 1px solid #f5c6cb;
-}
-
-/* Formulario */
-.form {
-  background-color: white;
+  max-width: 950px;
+  margin: auto;
+  background: white;
   padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  animation: fadeIn 0.5s ease;
 }
 
-.form-group {
+/* ANIMACIÓN */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* TÍTULO */
+h1 {
+  text-align: center;
+  color: #bc0ebc;
   margin-bottom: 20px;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #333;
+/* BOTONES GENERALES */
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
 }
 
-.form-group input,
-.form-group textarea,
-.form-group select {
+/* BOTÓN CREAR */
+button:first-of-type {
+  background: #ac10bd;
+  color: white;
+}
+
+button:first-of-type:hover {
+  background: #d012ff;
+  transform: scale(1.05);
+}
+
+/* FORMULARIO */
+.form input,
+.form select,
+.form textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-family: inherit;
-  font-size: 14px;
-  transition: border-color 0.3s;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-  outline: none;
-  border-color: #4CAF50;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.form button {
-  width: 100%;
-  padding: 12px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.form button:hover {
-  background-color: #45a049;
-}
-
-/* Lista de hortalizas */
-.list-container {
-  background-color: white;
-  padding: 30px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.2s;
 }
 
-.list-container h2 {
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 1.8rem;
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+  border-color: #c67db0;
+  outline: none;
+  box-shadow: 0 0 5px rgba(106, 17, 136, 0.3);
 }
 
-.hortalizas-table {
+/* TABLA */
+table {
   width: 100%;
+  margin-top: 20px;
   border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
-.hortalizas-table thead {
-  background-color: #4CAF50;
+/* ENCABEZADO */
+th {
+  background: #761494;
   color: white;
-}
-
-.hortalizas-table th {
-  padding: 15px;
+  padding: 12px;
   text-align: left;
-  font-weight: 600;
 }
 
-.hortalizas-table td {
-  padding: 15px;
-  border-bottom: 1px solid #ddd;
+/* FILAS */
+td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
 }
 
-.hortalizas-table tbody tr:hover {
-  background-color: #f9f9f9;
+tr:hover {
+  background: #f1f8e9;
+  transition: 0.2s;
 }
 
-.actions {
-  display: flex;
-  gap: 10px;
-}
-
-.btn-edit,
-.btn-delete {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: opacity 0.3s;
-}
-
+/* BOTONES ACCIONES */
 .btn-edit {
-  background-color: #2196F3;
+  background: #1976d2;
   color: white;
 }
 
 .btn-edit:hover {
-  opacity: 0.8;
+  background: #0d47a1;
+  transform: scale(1.05);
 }
 
 .btn-delete {
-  background-color: #f44336;
+  background: #d32f2f;
   color: white;
 }
 
 .btn-delete:hover {
-  opacity: 0.8;
+  background: #b71c1c;
+  transform: scale(1.05);
 }
 
-.list-container > p {
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  width: 350px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+/* ERROR */
+.error-message {
+  background: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
   text-align: center;
-  color: #666;
-  padding: 20px;
 }

@@ -1,13 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function Form({ onSubmit }) {
-  const [formData, setFormData] =({
+export default function Form({ onSubmit, initialData }) {
+  const [formData, setFormData] = useState({
     nombre: '',
     descripcion: '',
     cantidad: '',
     unidad: 'kg',
     precio: ''
   });
+
+  // 🔥 CARGAR DATOS CUANDO EDITAS
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        nombre: initialData.nombre || '',
+        descripcion: initialData.descripcion || '',
+        cantidad: initialData.cantidad || '',
+        unidad: initialData.unidad || 'kg',
+        precio: initialData.precio || ''
+      });
+    }
+  }, [initialData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,80 +32,72 @@ export default function Form({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
-    setFormData({
-      nombre: '',
-      descripcion: '',
-      cantidad: '',
-      unidad: 'kg',
-      precio: ''
+
+    onSubmit({
+      ...formData,
+      precio: Number(formData.precio),
+      cantidad: Number(formData.cantidad)
     });
+
+    // 🔥 limpiar solo si es crear
+    if (!initialData) {
+      setFormData({
+        nombre: '',
+        descripcion: '',
+        cantidad: '',
+        unidad: 'kg',
+        precio: ''
+      });
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="form">
-      <div className="form-group">
-        <label htmlFor="nombre">Nombre:</label>
-        <input
-          type="text"
-          id="nombre"
-          name="nombre"
-          value={formData.nombre}
-          onChange={handleChange}
-          required
-        />
-      </div>
 
-      <div className="form-group">
-        <label htmlFor="descripcion">Descripción:</label>
-        <textarea
-          id="descripcion"
-          name="descripcion"
-          value={formData.descripcion}
-          onChange={handleChange}
-        />
-      </div>
+      <input
+        name="nombre"
+        placeholder="Nombre"
+        value={formData.nombre}
+        onChange={handleChange}
+      />
 
-      <div className="form-group">
-        <label htmlFor="cantidad">Cantidad:</label>
-        <input
-          type="number"
-          id="cantidad"
-          name="cantidad"
-          value={formData.cantidad}
-          onChange={handleChange}
-          step="0.01"
-        />
-      </div>
+      <input
+        name="descripcion"
+        placeholder="Descripción"
+        value={formData.descripcion}
+        onChange={handleChange}
+      />
 
-      <div className="form-group">
-        <label htmlFor="unidad">Unidad:</label>
-        <select
-          id="unidad"
-          name="unidad"
-          value={formData.unidad}
-          onChange={handleChange}
-        >
-          <option value="kg">kg</option>
-          <option value="g">g</option>
-          <option value="unidades">unidades</option>
-          <option value="litros">litros</option>
-        </select>
-      </div>
+      <input
+        name="cantidad"
+        type="number"
+        placeholder="Cantidad"
+        value={formData.cantidad}
+        onChange={handleChange}
+      />
 
-      <div className="form-group">
-        <label htmlFor="precio">Precio:</label>
-        <input
-          type="number"
-          id="precio"
-          name="precio"
-          value={formData.precio}
-          onChange={handleChange}
-          step="0.01"
-        />
-      </div>
+      <select
+        name="unidad"
+        value={formData.unidad}
+        onChange={handleChange}
+      >
+        <option value="kg">kg</option>
+        <option value="g">g</option>
+        <option value="unidades">unidades</option>
+      </select>
 
-      <button type="submit">Agregar Hortaliza</button>
+      <input
+        name="precio"
+        type="number"
+        placeholder="Precio"
+        value={formData.precio}
+        onChange={handleChange}
+      />
+
+      <button type="submit">
+        {initialData ? "Actualizar" : "Guardar"}
+      </button>
+
     </form>
   );
 }

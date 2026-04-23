@@ -1,23 +1,23 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'http://backend-service-tatiana:5000/api/hortalizas';
 
 const api = {
-  // Obtener todas las hortalizas
+  // 🔹 Obtener todas
   obtenerHortalizas: async () => {
-    const response = await fetch(`${}/hortalizas`);
+    const response = await fetch(API_BASE_URL);
     if (!response.ok) throw new Error('Error al obtener hortalizas');
     return response.json();
   },
 
-  // Obtener una hortaliza por ID
+  // 🔹 Obtener una
   obtenerHortaliza: async (id) => {
-    const response = await fetch(`${}/hortalizas/${id}`);
+    const response = await fetch(`${API_BASE_URL}/${id}`);
     if (!response.ok) throw new Error('Error al obtener hortaliza');
     return response.json();
   },
 
-  // Crear una nueva hortaliza
+  // 🔹 Crear
   crearHortaliza: async (datos) => {
-    const response = await fetch(`${API_BASE_URL}/hortalizas`, {
+    const response = await fetch(API_BASE_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -28,9 +28,9 @@ const api = {
     return response.json();
   },
 
-  // Actualizar una hortaliza
+  // 🔹 Actualizar
   actualizarHortaliza: async (id, datos) => {
-    const response = await fetch(`${API_BASE_URL}/hortalizas/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -41,9 +41,9 @@ const api = {
     return response.json();
   },
 
-  // Eliminar una hortaliza
+  // 🔹 Eliminar
   eliminarHortaliza: async (id) => {
-    const response = await fetch(`${API_BASE_URL}/hortalizas/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/${id}`, {
       method: 'DELETE'
     });
     if (!response.ok) throw new Error('Error al eliminar hortaliza');
