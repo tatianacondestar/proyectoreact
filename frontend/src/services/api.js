@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://13.217.83.171:30007/api/hortalizas';
+const API_BASE_URL = 'http://tatiana-backend-service:5000/api/hortalizas';
 
 const api = {
   // 🔹 Obtener todas
